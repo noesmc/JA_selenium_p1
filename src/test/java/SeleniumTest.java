@@ -2,9 +2,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import java.util.List;
 
 public class SeleniumTest {
@@ -14,8 +14,21 @@ public class SeleniumTest {
         driver.get("https://the-internet.herokuapp.com/");
         List<WebElement> links = driver.findElements(By.xpath("//li//a"));
         links.get(9).click();
-        Assert.assertEquals(driver.getCurrentUrl(),"https://the-internet.herokuapp.com/drag_and_drop",
+        Assert.assertEquals(driver.getCurrentUrl(), "https://the-internet.herokuapp.com/drag_and_drop",
             "The \"Drag and drop\" page isn't open");
         driver.quit();
+    }
+
+
+    @Test(dependsOnMethods = "firstSeleniumTest")
+    public static void dsfs() {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://the-internet.herokuapp.com/");
+        List<WebElement> links = driver.findElements(By.xpath("//li//a"));
+        links.get(9).click();
+        WebElement boxA = driver.findElement(By.xpath("//div[@id='column-a']"));
+        WebElement boxB = driver.findElement(By.xpath("//div[@id='column-b']"));
+        Actions builder = new Actions(driver);
+        builder.dragAndDrop(boxA, boxB).perform();
     }
 }
