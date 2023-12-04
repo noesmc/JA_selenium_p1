@@ -21,7 +21,7 @@ public class SeleniumTest {
 
 
     @Test(dependsOnMethods = "firstSeleniumTest")
-    public static void dsfs() {
+    public static void dependsTest() {
         WebDriver driver = new ChromeDriver();
         driver.get("https://the-internet.herokuapp.com/");
         List<WebElement> links = driver.findElements(By.xpath("//li//a"));
